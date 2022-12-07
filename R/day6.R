@@ -41,7 +41,7 @@ answer # 1175
 ## PART TWO 
 # character after the start-of-message marker - 14 consecutive distinct characters (first instance of this) 
 
-# try just length unique 
+# try just length unique (the above was far too slow for 14 even if iterating through i to i+13)
 ## start at the first character and loop until marker is found
 ## but instead of checking every string, we just need the first one... (checking all was too long). Now, stop if it gets to a sequence of 14 unique characters 
 # to use length(unique), need the input to be a string subsettable by index 
@@ -51,7 +51,7 @@ characters_2 <- unlist(strsplit(datastream$V1, ""))
 i <- 0
 answer <- 0
 while(i >= answer){
-  if(length(unique(characters_2[i:(i+13)]))==14){
+  if(length(unique(characters_2[i:(i+13)])) == 14){
     answer <- i + 13
   }
   i <- i + 1 
