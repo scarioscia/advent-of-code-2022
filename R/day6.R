@@ -39,8 +39,22 @@ while (i >= answer) {
 answer # 1175
 
 ## PART TWO 
-# character after the start-of-message marker - 14 consecutive distinct characters 
+# character after the start-of-message marker - 14 consecutive distinct characters (first instance of this) 
 
-# can use stringr::str_count to find the number of each letter that is present in my test string
-# so `str_count(test, letters)` returns 26 values. The number output shows the number of instances of that letter in test
-# for it to have 14 unique letters in a 14-letter string, the output of `length(which(str_count(test, letters) == 0))` needs to be 12 
+# try just length unique 
+## start at the first character and loop until marker is found
+## but instead of checking every string, we just need the first one... (checking all was too long). Now, stop if it gets to a sequence of 14 unique characters 
+# to use length(unique), need the input to be a string subsettable by index 
+characters_2 <- unlist(strsplit(datastream$V1, ""))
+
+# could also make this a function and have the length of sequence (4 or 14) be a passed argument 
+i <- 0
+answer <- 0
+while(i >= answer){
+  if(length(unique(characters_2[i:(i+13)]))==14){
+    answer <- i + 13
+  }
+  i <- i + 1 
+}
+
+answer # 3217
